@@ -1,0 +1,44 @@
+{
+  "nodes": {
+    "iosevka-upstream": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1737190003,
+        "narHash": "sha256-kB4CsC/hHstajLcVYBxO7RD0lsZymrxlUha4cRtQ7Ak=",
+        "owner": "be5invis",
+        "repo": "Iosevka",
+        "rev": "a5d26cb87836c7245dcae2c741663017245cdd18",
+        "type": "github"
+      },
+      "original": {
+        "owner": "be5invis",
+        "repo": "Iosevka",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1737062831,
+        "narHash": "sha256-Tbk1MZbtV2s5aG+iM99U8FqwxU/YNArMcWAv6clcsBc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "iosevka-upstream": "iosevka-upstream",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

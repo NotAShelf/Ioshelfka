@@ -1,0 +1,71 @@
+[buildPlans.IoshelfkaTerm]
+family = "Ioshelfka Term"
+spacing = "term"
+serifs = "sans"
+noCvSs = false
+exportGlyphNames = true
+
+  [buildPlans.IoshelfkaTerm.variants]
+  inherits = "ss05"
+
+    [buildPlans.IoshelfkaTerm.variants.design]
+    one = "no-base"
+    zero = "slashed"
+    capital-a = "straight-serifless"
+    capital-i = "short-serifed"
+    capital-x = "straight-serifless"
+    a = "double-storey-serifless"
+    c = "serifless"
+    f = "serifless"
+    g = "single-storey-serifless"
+    j = "flat-hook-serifed"
+    l = "serifed"
+    w = "straight-serifless"
+    lower-lambda = "straight"
+    lower-pi = "tailed"
+    tittle = "square"
+    tilde = "low"
+    asterisk = "turn-hex-low"
+    underscore = "low"
+    caret = "low"
+    ascii-single-quote = "straight"
+    paren = "flat-arc"
+    brace = "straight"
+    guillemet = "curly"
+    number-sign = "upright"
+    at = "fourfold"
+    dollar = "through"
+    bar = "force-upright"
+    question = "smooth"
+    lig-plus-chain = "without-notch"
+    lig-double-arrow-bar = "without-notch"
+    lig-single-arrow-bar = "without-notch"
+
+  [buildPlans.IoshelfkaTerm.ligations]
+  inherits = "fstar"
+
+
+[buildPlans.IoshelfkaTerm.weights.Regular]
+shape = 400
+menu = 400
+css = 400
+
+[buildPlans.IoshelfkaTerm.weights.Medium]
+shape = 500
+menu = 500
+css = 500
+
+[buildPlans.IoshelfkaTerm.weights.SemiBold]
+shape = 600
+menu = 600
+css = 600
+
+[buildPlans.IoshelfkaTerm.weights.Bold]
+shape = 700
+menu = 700
+css = 700
+
+[buildPlans.IoshelfkaTerm.widths.Normal]
+shape = 600
+menu = 5
+css = "normal"

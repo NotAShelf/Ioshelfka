@@ -1,0 +1,37 @@
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          extra-conf: |
+            extra-experimental-features = nix-command flakes
+            allow-import-from-derivation = true
+
+      - name: Install Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build
+        run: |
+          #!/usr/bin/env bash
+          set -eux
+
+          nix build .#iosevka-mono-nerd -Lv
+          zip -9 -r iosevka-mono-nerd.zip ./result
+
+      - uses: ncipollo/release-action@v1
+        name: Release
+        with:
+          omitBody: true
+          omitName: true
+          allowUpdates: true
+          artifacts: ioshelfka-mono-nerd.zip
