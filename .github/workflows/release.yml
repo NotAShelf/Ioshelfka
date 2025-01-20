@@ -24,7 +24,7 @@ jobs:
           #!/usr/bin/env bash
           set -eux
 
-          nix build .#iosevka-mono-nerd -Lv
+          nix build .#ioshelfka-mono-nerd -Lv
 
           # Contains fonts and a NerdFonts directory.
           zip -9 -r iosevka-mono-nerd.zip ./result/share/fonts/truetype
