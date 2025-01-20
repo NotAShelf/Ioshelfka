@@ -1,5 +1,6 @@
 {
   inputs,
+  self,
   lib,
   # Deps
   buildNpmPackage,
@@ -32,7 +33,7 @@
     then "ttf-unhinted::${pname}"
     else throw "Unsupported features: ${toString features}";
 
-  buildPlan = ./plans/${lib.toLower variant}.toml;
+  buildPlan = self + /plans/${lib.toLower variant}.toml;
 in
   buildNpmPackage {
     inherit pname version;

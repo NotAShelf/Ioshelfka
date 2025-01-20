@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
   push:
-    tags: ["v*"]
+    tags: ["v*", "test*"]
 
 jobs:
   build:
@@ -10,6 +10,7 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
         with:
+          logger: pretty
           extra-conf: |
             extra-experimental-features = nix-command flakes
 
@@ -17,22 +18,26 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@main
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build
         run: |
           #!/usr/bin/env bash
           set -eux
 
-          nix build .#ioshelfka-mono-nerd -Lv
+          # Build only the Mono Nerd variant for now. Rest can be handled with
+          # a matrix in the future.
+          nix build .#ioshelfka-mono-nerd --print-build-logs || exit 1
 
-          # Contains fonts and a NerdFonts directory.
-          zip -9 -r iosevka-mono-nerd.zip ./result/share/fonts/truetype
+          # Contains built fonts and a NerdFonts directory for *patched* fonts.
+          # Upload both of them, Nix might be able to resolve fonts from the
+          # unpacked archive.
+          zip -vr9 IoshelfkaMonoNerd.zip ./result/share/fonts/truetype
 
-      - uses: ncipollo/release-action@v1
-        name: Release
+      - name: Release
+        uses: ncipollo/release-action@v1
         with:
           omitBody: true
           omitName: true
           allowUpdates: true
-          artifacts: ioshelfka-mono-nerd.zip
+          artifacts: "IoshelfkaMonoNerd.zip"
