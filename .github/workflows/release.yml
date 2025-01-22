@@ -5,6 +5,17 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        include:
+          - package: ioshelfka-mono-nerd
+            artifact: IoshelfkaMonoNerd.zip
+          - package: ioshelfka-term-nerd
+            artifact: IoshelfkaTermNerd.zip
+          - package: ioshelfka-mono
+            artifact: IoshelfkaMono.zip
+          - package: ioshelfka-term
+            artifact: IoshelfkaTerm.zip
     runs-on: ubuntu-latest
     steps:
       - name: Install Nix
@@ -13,9 +24,6 @@ jobs:
           logger: pretty
           extra-conf: |
             extra-experimental-features = nix-command flakes
-
-      - name: Install Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,17 +35,18 @@ jobs:
 
           # Build only the Mono Nerd variant for now. Rest can be handled with
           # a matrix in the future.
-          nix build .#ioshelfka-mono-nerd --print-build-logs || exit 1
+          nix build .#${{ matrix.package }} --print-build-logs || exit 1
 
           # Contains built fonts and a NerdFonts directory for *patched* fonts.
           # Upload both of them, Nix might be able to resolve fonts from the
           # unpacked archive.
-          zip -vr9 IoshelfkaMonoNerd.zip ./result/share/fonts/truetype
+          zip -vr9  ${{ matrix.artifact }} ./result/share/fonts/truetype
 
-      - name: Release
-        uses: ncipollo/release-action@v1
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
         with:
-          omitBody: true
-          omitName: true
-          allowUpdates: true
-          artifacts: "IoshelfkaMonoNerd.zip"
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ matrix.artifact }}
+          asset_name: IoshelfkaMonoNerd.zip
+          tag: ${{ github.ref }}
+          overwrite: true
