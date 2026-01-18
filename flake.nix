@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     iosevka-upstream = {
-      url = "github:be5invis/Iosevka";
+      url = "github:be5invis/Iosevka?ref=refs/tags/v34.0.0";
       flake = false;
     };
   };
@@ -19,7 +19,8 @@
     pkgsForEach = nixpkgs.legacyPackages;
   in {
     packages = forEachSystem (system: let
-      base = pkgsForEach.${system}.callPackage ./nix/ioshelfka-base.nix {inherit inputs self;};
+      pkgs = pkgsForEach.${system};
+      base = pkgs.callPackage ./nix/ioshelfka-base.nix {inherit inputs self;};
     in {
       ioshelfka-mono = base.override {
         variant = "Mono";
@@ -44,10 +45,13 @@
       };
     });
 
-    devShells = forEachSystem (system: {
-      default = pkgsForEach.${system}.mkShell {
+    devShells = forEachSystem (system: let
+      pkgs = pkgsForEach.${system};
+    in {
+      default = pkgs.mkShell {
         packages = [
-          (pkgsForEach.${system}.python3.withPackages (python-pkgs:
+          # For generating font previews
+          (pkgs.python3.withPackages (python-pkgs:
             with python-pkgs; [
               pillow
               matplotlib

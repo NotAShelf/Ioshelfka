@@ -3,26 +3,27 @@
     "iosevka-upstream": {
       "flake": false,
       "locked": {
-        "lastModified": 1737190003,
-        "narHash": "sha256-kB4CsC/hHstajLcVYBxO7RD0lsZymrxlUha4cRtQ7Ak=",
+        "lastModified": 1767409371,
+        "narHash": "sha256-fASlzL/7pVDIs5wCkEUJaU0r0Gy5YGZ9kxiAskZHWcI=",
         "owner": "be5invis",
         "repo": "Iosevka",
-        "rev": "a5d26cb87836c7245dcae2c741663017245cdd18",
+        "rev": "4fd49b9e0ba339fa8ca7e40b361dd88b42eb80e6",
         "type": "github"
       },
       "original": {
         "owner": "be5invis",
+        "ref": "refs/tags/v34.0.0",
         "repo": "Iosevka",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1737062831,
-        "narHash": "sha256-Tbk1MZbtV2s5aG+iM99U8FqwxU/YNArMcWAv6clcsBc=",
+        "lastModified": 1768564909,
+        "narHash": "sha256-Kell/SpJYVkHWMvnhqJz/8DqQg2b6PguxVWOuadbHCc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
+        "rev": "e4bae1bd10c9c57b2cf517953ab70060a828ee6f",
         "type": "github"
       },
       "original": {
