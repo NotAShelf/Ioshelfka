@@ -8,6 +8,7 @@
   remarshal,
   ttfautohint-nox,
   nerd-font-patcher,
+  writableTmpDirAsHomeHook,
   # Options
   variant ? null, # "Mono" or "Term"
   features ? "ttf", # "full", "ttf" or "ttf-unhinted"
@@ -49,15 +50,16 @@ in
       remarshal
       ttfautohint-nox
       nerd-font-patcher
+
+      writableTmpDirAsHomeHook
     ];
 
     postPatch = ''
-      cp -avr ${buildPlan} private-build-plans.toml
+      install -Dm755 ${buildPlan} private-build-plans.toml
     '';
 
     enableParallelBuilding = true;
     buildPhase = ''
-      export HOME=$TMPDIR
       runHook preBuild
 
       # Build everything: TTF + webfont, hinted + unhinted
