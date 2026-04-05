@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     iosevka-upstream = {
-      url = "github:be5invis/Iosevka?ref=refs/tags/v34.0.0";
+      url = "github:be5invis/Iosevka?ref=refs/tags/v34.3.0";
       flake = false;
     };
   };
@@ -43,6 +43,13 @@
         features = "ttf";
         nerdfont = true;
       };
+
+      ioshelfka-full = pkgs.linkFarmFromDrvs "ioshelfka-full" (with self.packages.${system}; [
+        ioshelfka-mono
+        ioshelfka-term
+        ioshelfka-mono-nerda
+        ioshelfka-term-nerd
+      ]);
     });
 
     devShells = forEachSystem (system: let
@@ -59,5 +66,7 @@
         ];
       };
     });
+
+    hydraJobs = self.packages;
   };
 }
